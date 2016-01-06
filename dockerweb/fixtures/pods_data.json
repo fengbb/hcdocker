@@ -1,0 +1,344 @@
+{
+  "kind": "PodList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/pods",
+    "resourceVersion": "16838"
+  },
+  "items": [
+    {
+      "metadata": {
+        "name": "my-nginx-cih2u",
+        "generateName": "my-nginx-",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/pods/my-nginx-cih2u",
+        "uid": "f65f2e70-a264-11e5-b52b-06f3fc00010e",
+        "resourceVersion": "5962",
+        "creationTimestamp": "2015-12-14T13:17:01Z",
+        "labels": {
+          "run": "my-nginx"
+        },
+        "annotations": {
+          "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"default\",\"name\":\"my-nginx\",\"uid\":\"f65da15d-a264-11e5-b52b-06f3fc00010e\",\"apiVersion\":\"v1\",\"resourceVersion\":\"5616\"}}"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "my-nginx",
+            "image": "nginx",
+            "ports": [
+              {
+                "containerPort": 80,
+                "protocol": "TCP"
+              }
+            ],
+            "resources": {},
+            "terminationMessagePath": "/dev/termination-log",
+            "imagePullPolicy": "IfNotPresent"
+          }
+        ],
+        "restartPolicy": "Always",
+        "dnsPolicy": "ClusterFirst",
+        "nodeName": "192.168.153.81"
+      },
+      "status": {
+        "phase": "Running",
+        "conditions": [
+          {
+            "type": "Ready",
+            "status": "True"
+          }
+        ],
+        "hostIP": "192.168.153.81",
+        "podIP": "172.17.75.2",
+        "startTime": "2015-12-14T13:26:30Z",
+        "containerStatuses": [
+          {
+            "name": "my-nginx",
+            "state": {
+              "running": {
+                "startedAt": "2015-12-14T13:40:17Z"
+              }
+            },
+            "lastState": {},
+            "ready": true,
+            "restartCount": 0,
+            "image": "nginx",
+            "imageID": "docker://6ffc02088cb870652eca9ccd4c4fb582f75b29af2879792ed09bb46fd1c898ef",
+            "containerID": "docker://94b7748254a3f1f2be2dbf0d9ba189a4c1f246e27464fe7b91d8db0ca36f2f16"
+          }
+        ]
+      }
+    },
+    {
+      "metadata": {
+        "name": "my-nginx-xb6ye",
+        "generateName": "my-nginx-",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/pods/my-nginx-xb6ye",
+        "uid": "f65f5505-a264-11e5-b52b-06f3fc00010e",
+        "resourceVersion": "5787",
+        "creationTimestamp": "2015-12-14T13:17:01Z",
+        "labels": {
+          "run": "my-nginx"
+        },
+        "annotations": {
+          "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"default\",\"name\":\"my-nginx\",\"uid\":\"f65da15d-a264-11e5-b52b-06f3fc00010e\",\"apiVersion\":\"v1\",\"resourceVersion\":\"5616\"}}"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "my-nginx",
+            "image": "nginx",
+            "ports": [
+              {
+                "containerPort": 80,
+                "protocol": "TCP"
+              }
+            ],
+            "resources": {},
+            "terminationMessagePath": "/dev/termination-log",
+            "imagePullPolicy": "IfNotPresent"
+          }
+        ],
+        "restartPolicy": "Always",
+        "dnsPolicy": "ClusterFirst",
+        "nodeName": "192.168.153.86"
+      },
+      "status": {
+        "phase": "Running",
+        "conditions": [
+          {
+            "type": "Ready",
+            "status": "True"
+          }
+        ],
+        "hostIP": "192.168.153.86",
+        "podIP": "172.17.0.1",
+        "startTime": "2015-12-14T13:26:55Z",
+        "containerStatuses": [
+          {
+            "name": "my-nginx",
+            "state": {
+              "running": {
+                "startedAt": "2015-12-14T13:26:13Z"
+              }
+            },
+            "lastState": {},
+            "ready": true,
+            "restartCount": 0,
+            "image": "nginx",
+            "imageID": "docker://6ffc02088cb870652eca9ccd4c4fb582f75b29af2879792ed09bb46fd1c898ef",
+            "containerID": "docker://017a8cc538f267ce086452a8cc33344f2880b7dccc9e1deef4659e73618fdb8e"
+          }
+        ]
+      }
+    },
+    {
+      "metadata": {
+        "name": "my-ubuntu-0qqx1",
+        "generateName": "my-ubuntu-",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/pods/my-ubuntu-0qqx1",
+        "uid": "14d2f7eb-a2c9-11e5-877e-06f3fc00010e",
+        "resourceVersion": "16836",
+        "creationTimestamp": "2015-12-15T01:13:42Z",
+        "labels": {
+          "run": "my-ubuntu"
+        },
+        "annotations": {
+          "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"default\",\"name\":\"my-ubuntu\",\"uid\":\"14d0cf1a-a2c9-11e5-877e-06f3fc00010e\",\"apiVersion\":\"v1\",\"resourceVersion\":\"14823\"}}"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "my-ubuntu",
+            "image": "ubuntu",
+            "resources": {},
+            "terminationMessagePath": "/dev/termination-log",
+            "imagePullPolicy": "IfNotPresent"
+          }
+        ],
+        "restartPolicy": "Always",
+        "dnsPolicy": "ClusterFirst",
+        "nodeName": "192.168.153.86"
+      },
+      "status": {
+        "phase": "Running",
+        "conditions": [
+          {
+            "type": "Ready",
+            "status": "False"
+          }
+        ],
+        "hostIP": "192.168.153.86",
+        "podIP": "172.17.0.3",
+        "startTime": "2015-12-15T01:13:44Z",
+        "containerStatuses": [
+          {
+            "name": "my-ubuntu",
+            "state": {
+              "terminated": {
+                "exitCode": 0,
+                "startedAt": "2015-12-15T02:08:11Z",
+                "finishedAt": "2015-12-15T02:08:11Z",
+                "containerID": "docker://f81475b9c8a8fa3cf7184812a52e6fad5fec24dab758dfde809dfbc8f5aadf10"
+              }
+            },
+            "lastState": {
+              "terminated": {
+                "exitCode": 0,
+                "startedAt": "2015-12-15T02:08:01Z",
+                "finishedAt": "2015-12-15T02:08:01Z",
+                "containerID": "docker://b72b7270c695cb379c6d20c734407e0343e8c73588b86a8ce46fd99eb20191be"
+              }
+            },
+            "ready": false,
+            "restartCount": 14,
+            "image": "ubuntu",
+            "imageID": "docker://d55e68e6cc9c7f78f1c02001e1a5ce76511db044c659e5c0a4275c54473f2869",
+            "containerID": "docker://f81475b9c8a8fa3cf7184812a52e6fad5fec24dab758dfde809dfbc8f5aadf10"
+          }
+        ]
+      }
+    },
+    {
+      "metadata": {
+        "name": "my-ubuntu-6vxff",
+        "generateName": "my-ubuntu-",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/pods/my-ubuntu-6vxff",
+        "uid": "14d3186a-a2c9-11e5-877e-06f3fc00010e",
+        "resourceVersion": "16837",
+        "creationTimestamp": "2015-12-15T01:13:42Z",
+        "labels": {
+          "run": "my-ubuntu"
+        },
+        "annotations": {
+          "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"default\",\"name\":\"my-ubuntu\",\"uid\":\"14d0cf1a-a2c9-11e5-877e-06f3fc00010e\",\"apiVersion\":\"v1\",\"resourceVersion\":\"14823\"}}"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "my-ubuntu",
+            "image": "ubuntu",
+            "resources": {},
+            "terminationMessagePath": "/dev/termination-log",
+            "imagePullPolicy": "IfNotPresent"
+          }
+        ],
+        "restartPolicy": "Always",
+        "dnsPolicy": "ClusterFirst",
+        "nodeName": "192.168.153.86"
+      },
+      "status": {
+        "phase": "Running",
+        "conditions": [
+          {
+            "type": "Ready",
+            "status": "False"
+          }
+        ],
+        "hostIP": "192.168.153.86",
+        "podIP": "172.17.0.2",
+        "startTime": "2015-12-15T01:13:44Z",
+        "containerStatuses": [
+          {
+            "name": "my-ubuntu",
+            "state": {
+              "terminated": {
+                "exitCode": 0,
+                "startedAt": "2015-12-15T02:08:11Z",
+                "finishedAt": "2015-12-15T02:08:11Z",
+                "containerID": "docker://3bf3f7238b4372f210e35efb91081f56a3dee7f4a158a2f0ce8882b60c4c5942"
+              }
+            },
+            "lastState": {
+              "terminated": {
+                "exitCode": 0,
+                "startedAt": "2015-12-15T02:08:01Z",
+                "finishedAt": "2015-12-15T02:08:01Z",
+                "containerID": "docker://ffa5a93aaf78d3a9735c5e692350a1f6ab2f734f3d92b46c47e1d90f967e64a5"
+              }
+            },
+            "ready": false,
+            "restartCount": 13,
+            "image": "ubuntu",
+            "imageID": "docker://d55e68e6cc9c7f78f1c02001e1a5ce76511db044c659e5c0a4275c54473f2869",
+            "containerID": "docker://3bf3f7238b4372f210e35efb91081f56a3dee7f4a158a2f0ce8882b60c4c5942"
+          }
+        ]
+      }
+    },
+    {
+      "metadata": {
+        "name": "my-ubuntu-fhxa7",
+        "generateName": "my-ubuntu-",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/pods/my-ubuntu-fhxa7",
+        "uid": "14d31125-a2c9-11e5-877e-06f3fc00010e",
+        "resourceVersion": "16835",
+        "creationTimestamp": "2015-12-15T01:13:42Z",
+        "labels": {
+          "run": "my-ubuntu"
+        },
+        "annotations": {
+          "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"default\",\"name\":\"my-ubuntu\",\"uid\":\"14d0cf1a-a2c9-11e5-877e-06f3fc00010e\",\"apiVersion\":\"v1\",\"resourceVersion\":\"14823\"}}"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "my-ubuntu",
+            "image": "ubuntu",
+            "resources": {},
+            "terminationMessagePath": "/dev/termination-log",
+            "imagePullPolicy": "IfNotPresent"
+          }
+        ],
+        "restartPolicy": "Always",
+        "dnsPolicy": "ClusterFirst",
+        "nodeName": "192.168.153.81"
+      },
+      "status": {
+        "phase": "Running",
+        "conditions": [
+          {
+            "type": "Ready",
+            "status": "False"
+          }
+        ],
+        "hostIP": "192.168.153.81",
+        "podIP": "172.17.75.3",
+        "startTime": "2015-12-15T01:13:44Z",
+        "containerStatuses": [
+          {
+            "name": "my-ubuntu",
+            "state": {
+              "running": {
+                "startedAt": "2015-12-15T02:08:11Z"
+              }
+            },
+            "lastState": {
+              "terminated": {
+                "exitCode": 0,
+                "startedAt": "2015-12-15T02:08:05Z",
+                "finishedAt": "2015-12-15T02:08:05Z",
+                "containerID": "docker://d9bf60f43c58fdb7ebae629fca0784a3d51b79640deaa0de4f2b35ced82852dd"
+              }
+            },
+            "ready": false,
+            "restartCount": 10,
+            "image": "ubuntu",
+            "imageID": "docker://d55e68e6cc9c7f78f1c02001e1a5ce76511db044c659e5c0a4275c54473f2869",
+            "containerID": "docker://c115696993a9256b0dfc1a7c7f3135e278ea0ac445d717713f54d579d808c5d7"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Docker管理后台</title>
+	<!--=================================================-->
+	<!--STYLESHEET-->
+    {% block main-head %}
+	<!--Bootstrap Stylesheet [ REQUIRED ]-->
+	<link href="/static/css/bootstrap.min.css" rel="stylesheet">
+	<!--Nifty Stylesheet [ REQUIRED ]-->
+	<link href="/static/css/nifty.min.css" rel="stylesheet">
+	<!--Font Awesome [ OPTIONAL ]-->
+	<link href="/static/css/font-awesome.css" rel="stylesheet">
+    <!--Customize Css [ REQUIRED ]-->
+	<link href="/static/css/custom.css" rel="stylesheet">
+    <!--bootstrap select Css [ REQUIRED ]-->
+	<link href="/static/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+	<link href="/static/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+	<link href="/static/plugins/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet">
+	<!--SCRIPT-->
+	<!--=================================================-->
+	<!--Page Load Progress Bar [ OPTIONAL ]-->
+	<link href="../static/css/pace.min.css" rel="stylesheet">
+	<script src="../static/js/pace.min.js"></script>
+        <script src="../static/js/jquery-2.1.1.min.js"></script>
+    {% endblock %}
+</head>
+<body>
+    <div id="container" class="effect mainnav-lg">
+    {% csrf_token %}
+		<!--NAVBAR-->
+		<!--===================================================-->
+		<header id="navbar">
+			<div id="navbar-container" class="boxed" >
+				<!--Brand logo & name-->
+				<!--================================-->
+				<div class="navbar-header">
+					<a href="index.html" class="navbar-brand">
+						<img src="/static/img/eye_logo.png" alt="Nifty Logo" class="brand-icon">
+						<div class="brand-title">
+							<span class="brand-text"> &nbsp;&nbsp;Docker</span>
+						</div>
+					</a>
+				</div>
+				<!--================================-->
+				<!--End brand logo & name-->
+				<!--Navbar Dropdown-->
+				<!--================================-->
+				<div class="navbar-content clearfix">
+					<ul class="nav navbar-top-links pull-left">
+						<!--Navigation toogle button-->
+						<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+						<li class="tgl-menu-btn">
+							<a class="mainnav-toggle" href="#">
+								<i class="fa fa-navicon fa-lg"></i>
+							</a>
+						</li>
+						<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+						<!--End Navigation toogle button-->
+
+					</ul>
+					<ul class="nav navbar-top-links pull-right">
+
+						<!--User dropdown-->
+						<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+						<li id="dropdown-user" class="dropdown">
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
+								<span class="pull-right">
+									<img class="img-circle img-user media-object" src="/static/img/av1.png" alt="Profile Picture">
+								</span>
+                                <!-- 登陆用户信息-->
+								<div class="username hidden-xs">{{ request.user.username }}</div>
+							</a>
+
+
+							<div class="dropdown-menu dropdown-menu-md dropdown-menu-right with-arrow panel-default">
+
+								<!-- User dropdown menu -->
+								<ul class="head-list">
+									<li>
+									</li>
+
+								</ul>
+
+								<!-- Dropdown footer -->
+								<div class="pad-all text-right">
+
+								</div>
+							</div>
+						</li>
+						<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+						<!--End user dropdown-->
+
+					</ul>
+				</div>
+				<!--================================-->
+				<!--End Navbar Dropdown-->
+
+			</div>
+		</header>
+		<!--===================================================-->
+		<!--END NAVBAR-->
+
+		<div class="boxed">
+
+			<!--CONTENT CONTAINER-->
+			<!--===================================================-->
+			<div id="content-container">
+
+				<!--Page Title-->
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<!--End page title-->
+
+
+				<!--Breadcrumb-->
+				<!--
+				<ol class="breadcrumb">
+					<li><a href="#">Home</a></li>
+					<li><a href="#">Library</a></li>
+					<li class="active">Data</li>
+				</ol>
+				-->
+				<!--End breadcrumb-->
+
+				<!--Page content-->
+				<!--===================================================-->
+				<div id="page-content">
+
+                    <div class="row">
+                    <!-- 这里的类名本来是col-lg-8，运用的栅栏格，将区域分成12个均等的部分，之前用的col-lg-8就大概代表占整个父级区域的百分之六十几，如果要占满整个父级的话，就应该要用col-lg-12 -->
+                        <div class="col-lg-12">
+
+                            <div class="panel">
+                                <div class="panel-heading">
+									<div class="panel-control">
+										<button id="demo-panel-network-refresh" data-toggle="panel-overlay" data-target="#demo-panel-network" class="btn"><i class="fa fa-rotate-right"></i></button>
+
+									</div>
+									<h3 class="panel-title">服务器管理</h3>
+                                    <div class="show">
+                                    </div>
+								</div>
+                            <!--<div id="chart-container" style="height: 300px; min-width: 600px;"> -->
+                                <div id="chart-container" style="height: 500px; width: 310px;">
+                            </div>
+                            </div>
+                        </div>
+			<!--<nav id="mainnav-container" style="height: 111%">-->
+            <nav id="mainnav-container" style="height: 80%">
+				<div id="mainnav">
+
+					<!--Shortcut buttons-->
+					<!--================================
+					<div id="mainnav-shortcut">
+						<ul class="list-unstyled">
+							<li class="col-xs-4" data-content="Shortcut 1">
+								<a class="shortcut-grid" href="#">
+									<i class="fa fa-car"></i>
+								</a>
+							</li>
+							<li class="col-xs-4" data-content="Shortcut 2">
+								<a class="shortcut-grid" href="#">
+									<i class="fa fa-taxi"></i>
+								</a>
+							</li>
+							<li class="col-xs-4" data-content="Shortcut 3">
+								<a class="shortcut-grid" href="#">
+									<i class="fa fa-bus"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+					================================-->
+					<!--End shortcut buttons-->
+					<!--Menu-->
+					<!--================================-->
+					<div id="mainnav-menu-wrap">
+						<div class="nano">
+							<div class="nano-content">
+								<ul id="mainnav-menu" class="list-group">
+									<!--Menu list item-->
+									{% if request.user.is_superuser %}
+									<li >
+										<a href="/">
+											<i class="fa fa-dashboard"></i>
+											<span class="menu-title">首页</span>
+										</a>
+									</li>
+									{% endif %}
+
+									<!--Menu list item-->
+									<li>
+										<a href="/hosts/?selected_group=-1">
+											<i class="fa fa-server"></i>
+											<span class="menu-title">
+												<strong>容器</strong>
+											</span>
+										</a>
+									</li>
+									<li>
+										<a href="/admin/" target="_blank">
+											<i class="fa fa-server"></i>
+											<span class="menu-title">
+                                                <strong>镜像</strong>
+											</span>
+										</a>
+
+									</li>
+
+									<!--Category name-->
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!--================================-->
+					<!--End menu-->
+
+				</div>
+			</nav>
+			<!--===================================================-->
+			<!--END MAIN NAVIGATION-->
+		</div>
+
+
+
+		<!-- FOOTER -->
+		<!--===================================================-->
+		<footer id="footer">
+			<!--<div class="hide-fixed pull-right pad-rgt">Currently v1.0</div>-->
+            <div class="text-lg-right">Currently v1.0</div>
+			<!--<p class="pad-lft">&#0169; 2015 Docker ; HC360(慧聪网运维部).</p>-->
+            <p class="text-center">&#0169; 2015 Docker管理后台 ; HC360(慧聪网运维部).</p>
+		</footer>
+		<!--===================================================-->
+		<!-- END FOOTER -->
+
+
+		<!-- SCROLL TOP BUTTON -->
+		<!--===================================================-->
+		<button id="scroll-top" class="btn"><i class="fa fa-chevron-up"></i></button>
+		<!--===================================================-->
+	</div>
+	<!--===================================================-->
+	<!-- END OF CONTAINER -->
+<!--Large Bootstrap Modal-->
+<!--===================================================-->
+<!--End Large Bootstrap Modal-->
+
+	<!--JAVASCRIPT-->
+	<!--=================================================-->
+
+	<!--jQuery [ REQUIRED ]-->
+	<script src="/static/js/jquery-2.1.1.min.js"></script>
+
+	<!--BootstrapJS [ RECOMMENDED ]-->
+	<script src="/static/js/bootstrap.min.js"></script>
+
+	<!--Fast Click [ OPTIONAL ]-->
+	<script src="/static/js/fastclick.min.js"></script>
+
+	<!--Nifty Admin [ RECOMMENDED ]-->
+	<script src="/static/js/nifty.min.js"></script>
+	<script src="/static/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+	<script src="/static/plugins/js.cookie.js"></script>
+	<script src="/static/plugins/jquery-ui/jquery-ui.min.js"></script>
+	<script src="/static/plugins/bootstrap-fileinput/js/fileinput.js"></script>
+	<script src="/static/plugins/bootstrap-fileinput/js/plugins/canvas-to-blob.js"></script>
+	<script src="/static/plugins/bootstrap-fileinput/js/fileinput_locale_zh.js"></script>
+
+    <script src="/static/plugins/bootstrap-validator/bootstrapValidator.js"></script>
+    <script src="/static/plugins/highstock/js/highstock.js"></script>
+    <script src="/static/plugins/highstock/js/modules/exporting.js"></script>
+            </div></div></div>
+  </body>
+<script>
+    $.ajax({
+        type:"get",
+        url:"http://127.0.0.1:8000/images",
+        dataType: 'json',
+        /*async:false,
+        jsonp: "callback",
+        jsonpCallback:"success",*/
+        /*contentType: "application/json",*/
+        success: function(data){
+            if(data.length>0){
+            //console.log(arr[0].metadata.name)
+                for(var i=0;i<data.length;i++){
+                	var p="";
+                	    p+='<div class="ownData">';
+                	    p+='<span><b>用户ID:</b>'+data[i].Id+'</span>';
+                	    p+='<span><b>用户RepoTags:</b>'+data[i].RepoTags+'</span>';
+                	    p+='</div>'
+
+                    $(".show").append(p);
+                }
+            }else{
+                alert("没有数据")
+            }
+        },
+        error:function(data){
+            alert(222);
+        }
+    });
+</script>
+</html>

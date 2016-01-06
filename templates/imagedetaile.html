@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}docker后台管理{% endblock %}
+{% block imagedetaile %}
+    <!--   镜像详细网页   -->
+     <style>
+	.idWidth{white-space: nowrap;text-overflow: ellipsis;display: block;overflow: hidden;width:100px;text-decoration: underline}
+	</style>
+    <div class="show">
+         <h3 class="panel-title">镜像管理</h3>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0"  >
+        <tr>
+            <th>镜像号</th>    <!-- id-->
+            <th>镜像标签</th>    <!-- RepoTags-->
+            <th>创建时间</th>    <!-- Created-->
+            <th>镜像大小</th>   <!-- VirtualSize-->
+        </tr>
+    </table>
+    </div>
+    <script>
+    $.ajax({
+        type:"get",
+        url:"http://127.0.0.1:8000/images/{{ imageid }}/json",
+        dataType: 'json',
+        /*async:false,
+        jsonp: "callback",
+        jsonpCallback:"success",*/
+        /*contentType: "application/json",*/
+        success: function(data){
+            if(data.length>0){
+            //console.log(arr[0].metadata.name)
+                for(var i=0;i<data.length;i++){
+                	var p="";
+                	    p+='<tr>';
+                	    //p+='<td class="ed"><span class="idWidth" href="/images/'+data[i].Id+'">'+data[i].Id+'</span></td>';
+                        p+='<td class="ed"><a  href="/images/'+ data[i].Id +'"> <span class="idWidth"> '+data[i].Id+'</span> </a> </td>';
+                        p+='<td>'+data[i].RepoTags+'</td>';
+                        p+='<td>'+new Date(data[i].Created)+'</td>';
+                        p+='<td>'+data[i].VirtualSize+'M'+'</td>';
+                        p+='</tr>';
+                    $("a.ed").attr("href");
+                    $(".show table").append(p);
+                }
+            }else{
+                alert("没有数据")
+            }
+        },
+        error:function(data){
+            alert(222);
+        }
+    });
+</script>
+{% endblock %}

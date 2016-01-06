@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}docker后台管理{% endblock %}
+{% block dl %}
+    {% if username  %}
+            <a  style="font-size: 18px;display: inline-block; margin: 20px 0px 0px 20px"  href=#>欢迎您:{{username}}</a>
+            <a  style="font-size: 18px;display: inline-block; margin: 20px 100px 0px 10px" href="/logout">注销</a>
+    {% endif %}
+{% endblock %}
+{% block container %}
+    <!--   容器网页   -->
+    <b><span style="font-size: 18px;color: red">{{ msg }}{{ deleteresult }}</span></b>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0"  >
+        <tr>
+            <th style="font-size: 14px;">创建用户</th>
+            <th style="font-size: 14px;">容器id</th>    <!-- id-->
+            <th style="font-size: 14px;">容器名</th>    <!-- Names-->
+            <th style="font-size: 14px;">容器使用的镜像</th>    <!-- Image -->
+            <th style="font-size: 14px;">容器IP地址</th>   <!-- IP-->
+            <th style="font-size: 14px;">容器密码</th>   <!-- password-->
+            <th style="font-size: 14px;">所在主机ip</th> <!-- password-->
+            <th style="font-size: 14px;">容器操作</th> <!-- password-->
+        </tr>
+          {% for container in containerobj %}
+        <tr>
+                <th style="font-size: 14px;">{{ container.username }}</th>
+                <!--<th>{{ container.containerid | truncatechars:"15" }}</th> 后面显示3个逗点-->
+                <th style="font-size: 14px;">{{ container.containerid | slice:"12"}}</th>
+                <th style="font-size: 14px;">{{ container.containername }}</th>
+                <th style="font-size: 14px;">{{ container.imagename }}</th>
+                <th style="font-size: 14px;">{{ container.containerhost }}</th>
+                <th style="font-size: 14px;">{{ container.password }}</th>
+                <th style="font-size: 14px;">{{ container.dockerhost }}</th>
+                <th>
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            操作
+                            <span class="caret"></span>
+                        </button>
+                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="/container/restart/{{ container.containerid }}">重启</a></li>
+                             <li><a href="/container/stop/{{ container.containerid }}">关机</a></li>
+                            <li><a href="/container/commit/{{ container.containerid }}">提交</a></li>
+                            <li><a href="/container/delete/{{ container.containerid }}">删除</a></li>
+                            </ul>
+                    </div>
+                </th>
+        </tr>
+              <!--
+               <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default">Left</button>
+                    <button type="button" class="btn btn-default">Middle</button>
+                   <button type="button" class="btn btn-default">Right</button>
+                </div>
+                -->
+      {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}docker后台管理{% endblock %}
+{% block dl %}
+      {% if username  %}
+          <a  style="font-size: 16px;display: inline-block; margin: 20px 0px 0px 20px"  href=#>欢迎您:{{username}}</a>
+          <a  style="font-size: 16px;display: inline-block; margin: 20px 50px 0px 10px" href="/logout">注销</a>
+      {% endif %}
+{% endblock %}
+{% block images %}
+    <h2 style="display: inline-block;margin: 0 20px 0 0 ">欢迎使用docker管理平台,请认真阅读以下使用规范。</h2><br>
+    <h4 style="display: inline-block;margin: 20px 20px 0 0">(1) docker管理平台提供容器的创建,删除,关闭,重启,提交和远程镜像查看功能</h4><br>
+    <h4 style="display: inline-block;margin: 20px 20px 0 0">(2) 每个用户可以创建5台容器</h4><br>
+    <h4 style="display: inline-block;margin: 20px 20px 0 0">(3) 容器创建完成后可以直接用容器列表中对应的ip和密码SSH登录</h4><br>
+    <h4 style="display: inline-block;margin: 20px 20px 0 0 ">(4) 删除容器的时候先关闭容器，并等待30秒左右然后进行删除</h4><br>
+    <h4 style="display: inline-block;margin: 20px 20px 0 0 ">(5) 提交镜像的时候，镜像名一定要按照规范命名centos(使用的iso类型)_app(项目名)_vx(版本)</h4><br>
+    <h4 style="display: inline-block;margin: 20px 20px 0 0 ">(6) 远程镜像已经提供了基础镜像centos_base,请在基础镜像上更改并提交</h4><br>
+    <h4 style="display: inline-block;margin: 20px 20px 0 0 ">(7) 容器更改完成后要记得提交</h4><br>
+{% endblock %}

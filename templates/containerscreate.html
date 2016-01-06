@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}docker后台管理{% endblock %}
+    {% block dl %}
+      {% if username  %}
+          <a  style="font-size: 16px;display: inline-block; margin: 20px 0px 0px 20px"  href=#>欢迎您:{{username}}</a>
+          <a  style="font-size: 16px;display: inline-block; margin: 20px 50px 0px 10px" href="/logout">注销</a>
+      {% endif %}
+{% endblock %}
+{% block container %}
+    <!--   容器网页   -->
+    <div class="show">
+    <b><span style="font-size: 18px;color: red">{{ msg }}</span></b>
+    </div>
+					<form id="loginForm"  method="POST">
+						<div class="row">
+                            <div class="col-lg-12">
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" style="font-size: 14px;">主机 &nbsp&nbsp  ip</button>
+                                    </span>
+                                    <select name="dockerhost" id="" style="font-size: 14px;" class="form-control">
+                                        <option value="docker主机IP地址" selected style="font-size: 14px;">docker主机IP地址</option>
+                                        {% for dockerip in dockerobj %}
+                                            <option name="dockerhost" value="{{ dockerip }}" style="font-size: 14px;">{{ dockerip.ip }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" style="font-size: 14px;">容器名称</button>
+                                    </span>
+                                    <input type="text" class="form-control" name="containername"  placeholder="容器名称" style="font-size: 14px;">
+                                </div><!-- /input-group -->
+                            </div><!-- /.col-lg-6 -->
+                            <div class="col-lg-12">
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" style="font-size: 14px;">镜像名称</button>
+                                    </span>
+                                    <input type="text" class="form-control" name="imagename" placeholder="私有仓库镜像名称" style="font-size: 14px;">
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                        </div>
+						<button class="btn btn-success  btn-block" type="submit">
+							<b style="font-size: 14px;">创建</b>
+						</button>
+					</form>
+			<!--<div class="pad-ver">
+				<a href="#" class="btn-link mar-rgt">Forgot password ?</a>
+				<a href="#" class="btn-link mar-lft">Create a new account</a>
+			</div>-->
+{% endblock %}
