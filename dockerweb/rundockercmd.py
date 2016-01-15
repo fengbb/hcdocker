@@ -3,6 +3,7 @@ import paramiko
 import time
 import random
 import os
+import re
 import sys
 ###################解决django在其他地方使用admin的models和temple##########################
 #from django.conf import settings                                                       #
@@ -16,7 +17,8 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE",'docker.settings')             ##
 from dockerweb.models import Container,ContainerIp                                                #
 #函数创建一个容器
 from django.conf import settings
-print(settings.DOCKERDOMAIN)
+#print(settings.DOCKERDOMAIN)
+imagedomain = settings.DOCKERDOMAIN
 def sshClient(ip,dockerpwd):
     ssh = paramiko.SSHClient()
     ssh.load_system_host_keys()
@@ -26,44 +28,56 @@ def sshClient(ip,dockerpwd):
     return ssh
 def createContainer(sshobject,dockername,imagename,containerip,ip1,ip2,ip3):
     ##启动一台容器的命令
-    cmd = 'docker run -itd --name %s --net=none hc.docker.io:5000/%s  /bin/bash' % (dockername,imagename)
+    cmd = 'docker run -itd --name %s --net=none %s/%s /bin/bash' % (dockername,imagedomain,imagename)
     #print (cmd)
     stdinstart,stdoutstart,stderrstart = sshobject.exec_command(cmd)
     #返回创建docker的id
     containerid = stdoutstart.read().decode()
     time.sleep(10)
+    print(containerid)
+    basepassword = ''.join(random.sample('zyxwvutsrqponmlkjihgfedcba0123456789',8))
     #notUsedIp = ContainerIp.objects.filter(used=0)
     #ip = str(random.choice(notUsedIp))
     #ipfirst = ip.split('.')[:3]
     #ip1,ip2,ip3 = (ipfirst)
     #print(ip,ip1,ip2,ip3)
-    cmdsetip = 'pipework br0 %s %s/24@%s.%s.%s.1' %(dockername,containerip,ip1,ip2,ip3)
-    stdinnet,stdoutnet,stderrnet = sshobject.exec_command(cmdsetip)
-    print(cmdsetip)
-    #ContainerIp.objects.filter(ip=ip).update(used=1)
-    cmdstartssh = 'docker exec -d %s /root/startssh.sh' %(dockername)
-    stdinssh,stdoutssh,stderrssh = sshobject.exec_command(cmdstartssh)
-    #更改容器password
+    if containerid:
+        cmdsetip = 'pipework br0 %s %s/24@%s.%s.%s.1' %(dockername,containerip,ip1,ip2,ip3)
+        stdinnet,stdoutnet,stderrnet = sshobject.exec_command(cmdsetip)
+        print(cmdsetip)
+        #ContainerIp.objects.filter(ip=ip).update(used=1)
+        cmdstartssh = 'docker exec -d %s /root/startssh.sh' %(dockername)
+        stdinssh,stdoutssh,stderrssh = sshobject.exec_command(cmdstartssh)
+        #更改容器password
+        cmdchagepw = 'docker exec -d %s /root/cpasswd.sh %s' %(dockername,basepassword)
+        #配置容器ip,随机生成一个没有使用的ip
+        #while True:
+        #    lastip = random.randint(20,200)
+        #    ip = '192.168.153.%s' %(lastip)
+        #    if_ip_exist = Container.objects.filter(containerhost=ip)
+        #    if if_ip_exist:
+        #        lastip = random.randint(20,200)
+        #        continue
+        #    else:
+        #        break
+        #print (ip)
+        #更改容器ip的命令
+        #启动ssh命令
+        stdincp,stdoutcp,stderrcp = sshobject.exec_command(cmdchagepw)
+        #print(basepassword)
+        #print (cmdchagepw)
+        #print(cmdstartssh)
+    else:
+        pass
+    return containerid,basepassword
+
+
+def resetpassword(sshobject,dockername):
     basepassword = ''.join(random.sample('zyxwvutsrqponmlkjihgfedcba0123456789',8))
     cmdchagepw = 'docker exec -d %s /root/cpasswd.sh %s' %(dockername,basepassword)
-    #配置容器ip,随机生成一个没有使用的ip
-    #while True:
-    #    lastip = random.randint(20,200)
-    #    ip = '192.168.153.%s' %(lastip)
-    #    if_ip_exist = Container.objects.filter(containerhost=ip)
-    #    if if_ip_exist:
-    #        lastip = random.randint(20,200)
-    #        continue
-    #    else:
-    #        break
-    #print (ip)
-    #更改容器ip的命令
-    #启动ssh命令
     stdincp,stdoutcp,stderrcp = sshobject.exec_command(cmdchagepw)
-    #print(basepassword)
-    #print (cmdchagepw)
-    #print(cmdstartssh)
-    return containerid,basepassword
+    return basepassword
+
 def restartContainer(sshobject,dockerid,containerip,password):
     cmdrestartcontainer = 'docker restart %s' % (dockerid)
     stdinrestart,stdoutrestart,stderrrestart = sshobject.exec_command(cmdrestartcontainer)
@@ -86,7 +100,7 @@ def restartContainer(sshobject,dockerid,containerip,password):
 def stopContainer(sshobject,dockerid):
     cmdstop = 'docker stop %s' % (dockerid)
     stdinstop,stdoutstop,stderrstop = sshobject.exec_command(cmdstop)
-    time.sleep(10)
+    time.sleep(5)
     #print(stdoutstop.read().decode())
 def deleteContainer(sshobject,dockerid):
     cmdstop = 'docker rm %s' % (dockerid)
@@ -101,17 +115,17 @@ def commitContainer(sshobject,dockerid,imagename):
     #print(stdoutdate.read().decode())
     #cdate = stdoutdate.read().decode()
     #print(cdate)
-    cmdcommit = 'docker commit %s hc.docker.io:5000/%s' % (dockerid,imagename)
+    cmdcommit = 'docker commit %s %s/%s' % (dockerid,imagedomain,imagename)
     stdincommit,stdoutcommit,stderrcommit = sshobject.exec_command(cmdcommit)
     #print(stdoutcommit.read().decode())
     commitresult = stdoutcommit.read().decode()
     #print(commitresult)
     return commitresult
 def pushImage(sshobject,imageid,imagename):
-    cmdtag = 'docker tag %s hc.docker.io:5000/%s' %(imageid,imagename)
+    cmdtag = 'docker tag %s %s/%s' %(imageid,imagedomain,imagename)
     print(cmdtag)
     stdintag,stdouttag,stderrtag = sshobject.exec_command(cmdtag)
-    cmdpush = 'docker push hc.docker.io:5000/%s' % (imagename)
+    cmdpush = 'docker push %s/%s' % (imagedomain,imagename)
     print(cmdpush)
     stdinpush,stdoutpush,stderrpush = sshobject.exec_command(cmdpush)
     #print(stdoutpush.read().decode())
@@ -133,7 +147,7 @@ def getIp():
 
 
 #getIp()
-#createContainer(sshClient('192.168.153.80'),'testwindows','192.168.153.80:5000/centos6.6_bao')
+#createContainer(sshClient('192.168.153.80',123456),'testwindows','192.168.153.80:5000/centos6.6_bao')
 #deleteContainer(sshClient('192.168.153.80'),'824fd90f437b')
 #pushImage(sshClient('192.168.153.80'),'824fd90f437b','test')
 #ip = '192.168.153.80'

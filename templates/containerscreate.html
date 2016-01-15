@@ -21,7 +21,7 @@
                                     <select name="dockerhost" id="" style="font-size: 14px;" class="form-control">
                                         <option value="docker主机IP地址" selected style="font-size: 14px;">docker主机IP地址</option>
                                         {% for dockerip in dockerobj %}
-                                            <option name="dockerhost" value="{{ dockerip }}" style="font-size: 14px;">{{ dockerip.ip }}</option>
+                                            <option name="dockerhost" value="{{ dockerip.ip }}" style="font-size: 14px;">{{ dockerip.ip }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -42,13 +42,93 @@
                                     <input type="text" class="form-control" name="imagename" placeholder="私有仓库镜像名称" style="font-size: 14px;">
                             </div><!-- /input-group -->
                         </div><!-- /.col-lg-6 -->
+                         <div class="col-lg-12">
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" style="font-size: 14px;">备&nbsp&nbsp&nbsp&nbsp注&nbsp&nbsp&nbsp</button>
+                                    </span>
+                                    <input type="text" class="form-control" name="bz"  placeholder="备注" style="font-size: 14px;">
+                                </div><!-- /input-group -->
+                            </div><!-- /.col-lg-6 -->
                         </div>
 						<button class="btn btn-success  btn-block" type="submit">
 							<b style="font-size: 14px;">创建</b>
 						</button>
 					</form>
+                    <table>
+                        <tr>
+                            <th style="font-size: 16px;">{{ containerid }}&nbsp&nbsp&nbsp&nbsp </th>   <!-- id-->
+                            <th style="font-size: 16px;">{{ containername }}&nbsp&nbsp&nbsp&nbsp </th>   <!-- Names-->
+                            <th style="font-size: 16px;"> {{ ip }}&nbsp&nbsp&nbsp&nbsp </th>  <!-- IP-->
+                            <th style="font-size: 16px;">{{ password  }}&nbsp&nbsp&nbsp&nbsp </th>  <!-- password-->
+                        </tr>
+                    </table>
 			<!--<div class="pad-ver">
 				<a href="#" class="btn-link mar-rgt">Forgot password ?</a>
 				<a href="#" class="btn-link mar-lft">Create a new account</a>
 			</div>-->
+    <script type="text/javascript">
+$(document).ready(function() {
+    $('#loginForm').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            dockerhost: {
+                message: 'The username is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The dockerhost is required and cannot be empty'
+                    },
+                    stringLength: {
+                        min: 2,
+                        max: 30,
+                        message: 'The dockerhost must be more than 6 and less than 30 characters long'
+                    },
+                }
+            },
+            containername:{
+                message: "The containername is not valid",
+                validators:{
+                    notEmpty:{
+                        'message': "the containername is required and cannot be empty"
+                    },
+                    stringLength:{
+                        min:3,
+                        max:30,
+                        message:'The containername must be more than 6 and less than 30 characters long'
+                    },
+                }
+            },
+            imagename:{
+                message: "The imagename is not valid",
+                validators:{
+                    notEmpty:{
+                        'message': "the imagename is required and cannot be empty"
+                    },
+                    stringLength:{
+                        min:3,
+                        max:30,
+                        message:'The imagename must be more than 6 and less than 30 characters long'
+                    },
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email is required and cannot be empty'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    }
+                }
+            }
+        }
+    });
+});
+
+</script>
 {% endblock %}

@@ -1,15 +1,17 @@
 from django.db import models
+from django.contrib.auth.models import User
 import json
 
 # Create your models here.
 class Container(models.Model):
     username = models.CharField(u'用户名',max_length=30)
     containerid = models.CharField(u'容器号',max_length=100)
-    containername = models.CharField(u'容器名',max_length=30)
+    containername = models.CharField(u'容器名',max_length=30,unique=True)
     dockerhost = models.GenericIPAddressField(u'所在docker主机IP')
     containerhost = models.GenericIPAddressField(u'容器IP地址')
     imagename = models.CharField(u'镜像名',max_length=50)
-    password = models.CharField(u'密码',max_length=10,null=True)
+    password = models.CharField(u'密码',max_length=10)
+    bz = models.CharField(u'备注',max_length=100,null=True)
     #status = models.CharField(u'状态',max_length=50,null=True,blank=True)
 
     def __str__(self):
@@ -26,13 +28,43 @@ class DockerHost(models.Model):
         verbose_name = 'docker主机'
         verbose_name_plural = 'docker主机管理'
 class ContainerIp(models.Model):
-    ip = models.GenericIPAddressField(u'container主机可以获取的IP')
+    ip = models.GenericIPAddressField(u'container主机可以获取的IP',unique=True)
     used = models.IntegerField(u'是否已经使用',default=0)#ip是否被使用0，没有使用，1已经使用
     def __str__(self):
         return self.ip
     class Meta:
         verbose_name = '容器IP'
         verbose_name_plural = '容器IP管理'
+class Project(models.Model):
+    username = models.OneToOneField(User)
+    departmentname = models.CharField(u'项目组',max_length=30,unique=True)
+    def __str__(self):
+        return self.departmentname
+    class Meta:
+        verbose_name = '项目组'
+        verbose_name_plural = '项目组管理'
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    name = models.CharField(max_length=30,unique=True)
+    departmentname = models.ForeignKey(Project)
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name = 'Docker管理平台账户'
+        verbose_name_plural = 'Docker管理账户'
+class ImageName(models.Model):
+    username = models.CharField(u'提交者',max_length=30)
+    imagename = models.CharField(u'镜像名称',max_length=30)
+    departmentname = models.CharField(u'所属项目组',max_length=100)
+    bz = models.CharField(u'备注',max_length=100,null=True)
+    def __str__(self):
+        return self.imagename
+    class Meta:
+        verbose_name = '镜像'
+        verbose_name_plural = '镜像管理'
+
+
+
 '''
 class pods(models.Model):
     name = models.CharField(max_length=30)

@@ -17,13 +17,9 @@
         <tr>
             <th style="font-size: 18px">镜像名</th>    <!-- id-->
         </tr>
-         {% for image in imageobj %}
-             <tr>
-                <th style="font-size: 18px">
-                 {{ image.imagename }}
-                 </th>
-         {% endfor %}
-            </tr>
+         <tr>
+             <th style="font-size: 18px">{{ name }}</th>
+         </tr>
     </table>
     </div>
 {% endblock %}

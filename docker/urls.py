@@ -18,10 +18,11 @@ urlpatterns = [
     url(r'^containers/list/$',containerlist), #显示containers
     url(r'^container/restart/.*$',containerrestart), #重启container
     url(r'^container/stop/.*$',containerstop), #关闭container
+    url(r'^container/resetpassword/.*$',resetpassword), #重置密码
     url(r'^container/commit/.*$',containercommit), #提交container
     url(r'^container/delete/.*$',containerdelete), #删除container
     url(r'^images/registry/$',registryimage),#查看私有仓库镜像
-    url(r'^images/registry/json/$',registryimagesjson),#吧私有仓库json数据转换到本地，然后用ajax处理
+    #url(r'^images/registry/json/$',registryimagesjson),#吧私有仓库json数据转换到本地，然后用ajax处理
 
 
     #url(r'^api/v1/pods',pods)

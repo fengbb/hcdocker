@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	    <title>{% block title %}{% endblock %}</title>
 	<!--=================================================-->
 	<!--STYLESHEET-->
@@ -35,7 +35,7 @@
 		<!--NAVBAR-->
 		<!--===================================================-->
 		<header id="navbar">
-			<div id="navbar-container" class="boxed" style="background-color:#e6ecec">
+			<div id="navbar-container" class="boxed" style="background-color:#e6ecec" >
 				<!--Brand logo & name-->
 				<!--================================-->
 				<div class="navbar-header">
@@ -79,7 +79,7 @@
 		<!--===================================================-->
 		<!--END NAVBAR-->
 
-		<div class="boxed">
+		<div class="boxed" >
 
 			<!--CONTENT CONTAINER-->
 			<!--===================================================-->
@@ -104,14 +104,12 @@
 
 				<!--Page content-->
 				<!--===================================================-->
-				<div id="page-content">
-
+				<div id="page-content" >
                     <div class="row">
                     <!-- 这里的类名本来是col-lg-8，运用的栅栏格，将区域分成12个均等的部分，之前用的col-lg-8就大概代表占整个父级区域的百分之六十几，如果要占满整个父级的话，就应该要用col-lg-12 -->
                         <div class="col-lg-12">
                             <div class="panel" style="background-color:#e6ecec">
-                                <div class="panel-heading" >
-                                    {% block titlename %}
+                                {% block titlename %}
                                     {% endblock %}
                                     <!--   容器网页   -->
                                         {% block container %}
@@ -121,14 +119,18 @@
                                     {% endblock %}
                                 {% block commit %}
                                 {% endblock %}
-								</div>
-                            <!--<div id="chart-container" style="height: 300px; min-width: 600px;"> -->
-                             <div id="chart-container" style="height: 700px; width: 310px;">
+                            <!--
+                            <div id="chart-container" style="height: 300px; min-width: 600px;">
+                            <div id="chart-container" style="height: 700px; width: 310px;">
+                            -->
+                            <div id="chart-container" style="height: 700px; width: 310px;">
+                                </div>
                             </div>
                             </div>
                         </div>
+                </div>
 			<!--<nav id="mainnav-container" style="height: 111%">-->
-            <nav id="mainnav-container" style="height: 80%">
+            <nav id="mainnav-container" style="height: 80%" >
 				<div id="mainnav">
 
 					<!--Shortcut buttons-->
@@ -156,7 +158,7 @@
 					<!--End shortcut buttons-->
 					<!--Menu-->
 					<!--================================-->
-					<div id="mainnav-menu-wrap">
+					<div id="mainnav-menu-wrap" >
 						<div class="nano">
 							<div class="nano-content">
 								<ul id="mainnav-menu" class="list-group">
