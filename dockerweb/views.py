@@ -283,6 +283,7 @@ def registryimage(request):
     #print(userid)
     userobj = UserProfile.objects.get(user_id=userid)
     departmentname = userobj.departmentname#根据user id 查出外键关联的项目组
+
     #print(departmentname)
     if username == 'admin':
         #print('成功')

@@ -2,32 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dcc639d3-0871-4859-aa6e-a8d4a9f3129c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dockerweb/registryjson.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dockerweb/migrations/0002_docker.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dockerweb/migrations/0003_container.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dockerweb/migrations/0004_auto_20151224_1752.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dockerweb/migrations/0005_auto_20151224_1816.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dockerweb/migrations/0006_auto_20151224_1817.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dockerweb/migrations/0007_container_password.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dockerweb/migrations/0008_container_username.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dockerweb/migrations/0009_auto_20151225_1804.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dockerweb/migrations/0010_auto_20151230_1123.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dockerweb/migrations/0011_auto_20151230_1126.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dockerweb/migrations/0012_containerip.py" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dockerweb/testdockerpy.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docker/urls.py" afterPath="$PROJECT_DIR$/docker/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dockerweb/admin.py" afterPath="$PROJECT_DIR$/dockerweb/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dockerweb/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/dockerweb/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dockerweb/models.py" afterPath="$PROJECT_DIR$/dockerweb/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dockerweb/rundockercmd.py" afterPath="$PROJECT_DIR$/dockerweb/rundockercmd.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dockerweb/views.py" afterPath="$PROJECT_DIR$/dockerweb/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/containercommit.html" afterPath="$PROJECT_DIR$/templates/containercommit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/containerscreate.html" afterPath="$PROJECT_DIR$/templates/containerscreate.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/containerslist.html" afterPath="$PROJECT_DIR$/templates/containerslist.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/login.html" afterPath="$PROJECT_DIR$/templates/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/registryimage.html" afterPath="$PROJECT_DIR$/templates/registryimage.html" />
     </list>
     <ignored path="docker.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,6 +21,7 @@
     <SUITE FILE_PATH="coverage/docker$registryjson.coverage" NAME="registryjson Coverage Results" MODIFIED="1452655650757" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dockerweb" />
     <SUITE FILE_PATH="coverage/docker$json2dic.coverage" NAME="json2dic Coverage Results" MODIFIED="1450177428413" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dockerweb" />
     <SUITE FILE_PATH="coverage/docker$utils.coverage" NAME="utils Coverage Results" MODIFIED="1450857613352" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dockerweb" />
+    <SUITE FILE_PATH="coverage/docker$testdockerpy.coverage" NAME="testdockerpy Coverage Results" MODIFIED="1452837523257" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dockerweb" />
     <SUITE FILE_PATH="coverage/docker$rundockercmd.coverage" NAME="rundockercmd Coverage Results" MODIFIED="1451876798576" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dockerweb" />
     <SUITE FILE_PATH="coverage/docker$testsplit.coverage" NAME="testsplit Coverage Results" MODIFIED="1450173618844" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dockerweb" />
     <SUITE FILE_PATH="coverage/docker$tests.coverage" NAME="tests Coverage Results" MODIFIED="1451368060302" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dockerweb" />
@@ -61,14 +39,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="rundockercmd.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="rundockercmd.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dockerweb/rundockercmd.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.13407822">
+            <state vertical-scroll-proportion="0.0">
               <caret line="87" column="43" selection-start-line="87" selection-start-column="16" selection-end-line="87" selection-end-column="48" />
               <folding>
                 <element signature="e#20#35#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dockerweb/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="285" column="0" selection-start-line="285" selection-start-column="0" selection-end-line="285" selection-end-column="0" />
+              <folding>
+                <element signature="e#49#123#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testdockerpy.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/dockerweb/testdockerpy.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0670194">
+              <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="registryjson.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dockerweb/registryjson.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="36" column="41" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -123,6 +133,7 @@
         <option value="$PROJECT_DIR$/templates/login.html" />
         <option value="$PROJECT_DIR$/templates/containerscreate.html" />
         <option value="$PROJECT_DIR$/dockerweb/views.py" />
+        <option value="$PROJECT_DIR$/dockerweb/testdockerpy.py" />
       </list>
     </option>
   </component>
@@ -132,8 +143,8 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
+    <option name="x" value="678" />
+    <option name="y" value="73" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -242,25 +253,7 @@
       <recent name="E:\PycharmProjects\docker\dockerweb\fixtures" />
     </key>
   </component>
-  <component name="RunManager" selected="Django server.docker">
-    <configuration default="false" name="utils" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/dockerweb" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="docker" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dockerweb/utils.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.testdockerpy">
     <configuration default="false" name="rundockercmd" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -329,6 +322,24 @@
       <module name="docker" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dockerweb/registryjson.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="testdockerpy" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/dockerweb" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="docker" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dockerweb/testdockerpy.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -575,19 +586,19 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Django server.docker" />
-      <item index="1" class="java.lang.String" itemvalue="Python.utils" />
-      <item index="2" class="java.lang.String" itemvalue="Python.rundockercmd" />
-      <item index="3" class="java.lang.String" itemvalue="Python.views" />
-      <item index="4" class="java.lang.String" itemvalue="Python.tests" />
-      <item index="5" class="java.lang.String" itemvalue="Python.registryjson" />
+      <item index="1" class="java.lang.String" itemvalue="Python.rundockercmd" />
+      <item index="2" class="java.lang.String" itemvalue="Python.views" />
+      <item index="3" class="java.lang.String" itemvalue="Python.tests" />
+      <item index="4" class="java.lang.String" itemvalue="Python.registryjson" />
+      <item index="5" class="java.lang.String" itemvalue="Python.testdockerpy" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.registryjson" />
-        <item index="1" class="java.lang.String" itemvalue="Python.rundockercmd" />
-        <item index="2" class="java.lang.String" itemvalue="Python.tests" />
-        <item index="3" class="java.lang.String" itemvalue="Python.views" />
-        <item index="4" class="java.lang.String" itemvalue="Python.utils" />
+        <item index="0" class="java.lang.String" itemvalue="Python.testdockerpy" />
+        <item index="1" class="java.lang.String" itemvalue="Python.registryjson" />
+        <item index="2" class="java.lang.String" itemvalue="Python.rundockercmd" />
+        <item index="3" class="java.lang.String" itemvalue="Python.tests" />
+        <item index="4" class="java.lang.String" itemvalue="Python.views" />
       </list>
     </recent_temporary>
   </component>
@@ -614,7 +625,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="678" y="73" width="1936" height="1056" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18656716" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -623,18 +634,18 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29761904" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35497835" sideWeight="0.49271846" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38375634" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35497835" sideWeight="0.49271846" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928312" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38375634" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -680,13 +691,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="16" selection-start-line="24" selection-start-column="8" selection-end-line="26" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/login1.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -737,7 +741,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#41#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -775,7 +779,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#41#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -813,7 +817,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#41#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -969,29 +973,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dockerweb/registryjson.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="41" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dockerweb/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="58" column="56" selection-start-line="58" selection-start-column="56" selection-end-line="58" selection-end-column="56" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dockerweb/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8659612">
-          <caret line="110" column="33" selection-start-line="110" selection-start-column="33" selection-end-line="110" selection-end-column="33" />
-          <folding>
-            <element signature="e#49#123#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1050,18 +1037,44 @@
         <state vertical-scroll-proportion="0.5643739">
           <caret line="23" column="54" selection-start-line="23" selection-start-column="49" selection-end-line="23" selection-end-column="54" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#41#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dockerweb/rundockercmd.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13407822">
+        <state vertical-scroll-proportion="0.0">
           <caret line="87" column="43" selection-start-line="87" selection-start-column="16" selection-end-line="87" selection-end-column="48" />
           <folding>
             <element signature="e#20#35#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dockerweb/registryjson.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="41" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dockerweb/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="285" column="0" selection-start-line="285" selection-start-column="0" selection-end-line="285" selection-end-column="0" />
+          <folding>
+            <element signature="e#49#123#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dockerweb/testdockerpy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0670194">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>
