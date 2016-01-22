@@ -17,6 +17,12 @@
         <tr>
             <th style="font-size: 18px">镜像名</th>    <!-- id-->
         </tr>
+         {% for imageadmin in imageadmin %}
+             <tr>
+                <th style="font-size: 18px">
+                 {{ imageadmin.imagename }}
+                 </th>
+         {% endfor %}
          {% for image in imageobj %}
              <tr>
                 <th style="font-size: 18px">

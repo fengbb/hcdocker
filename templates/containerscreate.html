@@ -29,6 +29,25 @@
                             <div class="col-lg-12">
                                 <div class="input-group">
                                     <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" style="font-size: 14px;">容器配置</button>
+                                    </span>
+                                    <select name="pz" id="" style="font-size: 14px;" class="form-control">
+                                        <option value="容器配置" selected style="font-size: 14px;">容器配置</option>
+                                        <option name="pz" value="1,1024m" style="font-size: 14px;">1核,1G内存</option>
+                                        <option name="pz" value="1,2048m" style="font-size: 14px;">1核,2G内存</option>
+                                        <option name="pz" value="2,2048m" style="font-size: 14px;">2核,2G内存</option>
+                                        <option name="pz" value="2,4096m" style="font-size: 14px;">2核,4G内存</option>
+                                        <option name="pz" value="2,8192m" style="font-size: 14px;">2核,8G内存</option>
+                                        <option name="pz" value="4,2048m" style="font-size: 14px;">4核,2G内存</option>
+                                        <option name="pz" value="4,4096m" style="font-size: 14px;">4核,4G内存</option>
+                                        <option name="pz" value="4,8192m" style="font-size: 14px;">4核,8G内存</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="input-group">
+                                    <span class="input-group-btn">
                                         <button class="btn btn-default" type="button" style="font-size: 14px;">容器名称</button>
                                     </span>
                                     <input type="text" class="form-control" name="containername"  placeholder="容器名称" style="font-size: 14px;">
@@ -39,7 +58,16 @@
                                     <span class="input-group-btn">
                                         <button class="btn btn-default" type="button" style="font-size: 14px;">镜像名称</button>
                                     </span>
-                                    <input type="text" class="form-control" name="imagename" placeholder="私有仓库镜像名称" style="font-size: 14px;">
+                                <select name="imagename" id="" style="font-size: 14px;" class="form-control">
+                                    <option name="imagename" value="centos_base" selected style="font-size: 14px;">centos</option>
+                                    {% for imageadmin in imageadmin %}
+                                        <option name="imagename" value="{{ imageadmin.imagename }}" style="font-size: 14px;">{{ imageadmin.imagename }}</option>
+                                    {% endfor %}
+                                    {% for image in imageobj %}
+                                        <option name="imagename" value="{{ image.imagename }}" style="font-size: 14px;">{{ image.imagename }}</option>
+                                    {% endfor %}
+                                    <!--<input type="text" class="form-control" name="imagename" placeholder="私有仓库镜像名称" style="font-size: 14px;">-->
+                                </select>
                             </div><!-- /input-group -->
                         </div><!-- /.col-lg-6 -->
                          <div class="col-lg-12">

@@ -26,10 +26,10 @@ def sshClient(ip,dockerpwd):
     ssh.connect(ip,password=dockerpwd,username="root")
     #print(ssh)
     return ssh
-def createContainer(sshobject,dockername,imagename,containerip,ip1,ip2,ip3):
+def createContainer(sshobject,dockername,cpuused,mem,imagename,containerip,ip1,ip2,ip3):
     ##启动一台容器的命令
-    cmd = 'docker run -itd --name %s --net=none %s/%s /bin/bash' % (dockername,imagedomain,imagename)
-    #print (cmd)
+    cmd = 'docker run -itd --name %s --net=none --cpuset-cpus %s -m %s %s/%s /bin/bash' % (dockername,cpuused,mem,imagedomain,imagename)
+    print (cmd)
     stdinstart,stdoutstart,stderrstart = sshobject.exec_command(cmd)
     #返回创建docker的id
     containerid = stdoutstart.read().decode()
@@ -130,7 +130,7 @@ def pushImage(sshobject,imageid,imagename):
     stdinpush,stdoutpush,stderrpush = sshobject.exec_command(cmdpush)
     #print(stdoutpush.read().decode())
     pushresult = stdoutpush.read().decode()
-    #print(commitresult)
+    print(pushresult)
     return pushresult
 def getIp():
     notUsedIp = ContainerIp.objects.filter(used=0)

@@ -17,8 +17,8 @@
             <th style="font-size: 14px;">容器使用的镜像</th>    <!-- Image -->
             <th style="font-size: 14px;">容器IP地址</th>   <!-- IP-->
             <th style="font-size: 14px;">容器密码</th>   <!-- password-->
-            <th style="font-size: 14px;">所在主机ip</th> <!-- password-->
-            <th style="font-size: 14px;">容器操作</th> <!-- password-->
+            <!--<th style="font-size: 14px;"></th> <!-- 主机ip-->
+            <th style="font-size: 14px;">容器操作</th> <!-- 操作-->
         </tr>
           {% for container in containerobj %}
         <tr>
@@ -29,7 +29,7 @@
                 <th style="font-size: 14px;">{{ container.imagename }}</th>
                 <th style="font-size: 14px;">{{ container.containerhost }}</th>
                 <th style="font-size: 14px;">{{ container.password }}</th>
-                <th style="font-size: 14px;">{{ container.dockerhost }}</th>
+                <!--<th style="font-size: 14px;">{{ container.dockerhost }}</th>-->
                 <th>
                     <div class="dropdown">
                         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -55,4 +55,33 @@
                 -->
       {% endfor %}
     </table>
+    <script>
+    $.ajax({
+        type:"get",
+        url:"http://127.0.0.1:8000/containers/json/",
+        dataType: 'json',
+        /*async:false,
+        jsonp: "callback",
+        jsonpCallback:"success",*/
+        /*contentType: "application/json",*/
+        success: function(data){
+            if(data.length>0){
+            //console.log(arr[0].metadata.name)
+                for(var i=0;i<data.length;i++){
+                	var p="";
+                	    p+='<tr>';
+                        p+='<th>'+data[i] +'</th>';
+                        p+='<th>'+data[i] +'</th>';
+                        p+='</tr>';
+                    $(".show table").append(p);
+                }
+            }else{
+                alert("没有数据")
+            }
+        },
+        error:function(data){
+            alert(222);
+        }
+    });
+</script>
 {% endblock %}
