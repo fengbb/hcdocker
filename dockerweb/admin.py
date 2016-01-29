@@ -1,10 +1,12 @@
 from django.contrib import admin
-from .models import Container,DockerHost,ContainerIp,ImageName,Project,UserProfile,CpuInfo,Format
+#from .models import Container,DockerHost,ContainerIp,ImageName,Project,UserProfile,CpuInfo,Format
+from dockerweb.models import *
 
 
 # Register your models here.
 class ContainerAdmin(admin.ModelAdmin):
-    list_display = ('username','containerid','containername','dockerhost','imagename','containerhost','password','cpunumber','bz')
+    list_display = ('username','containerid','containername','dockerhost','imagename','containerhost','password','cpunumber','cmem','ccpu','bz')
+    #list_display = ('username','containerid','containername','dockerhost','imagename','containerhost','password','cpunumber','bz')
 class DockerHostAdmin(admin.ModelAdmin):
     list_display = ('ip',)
 class ContainerIPAdmin(admin.ModelAdmin):

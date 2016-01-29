@@ -38,7 +38,7 @@
 				<!--================================-->
 				<div class="navbar-header">
 					<a href="index.html" class="navbar-brand">
-						<img src="/static/img/eye_logo.png" alt="Nifty Logo" class="brand-icon">
+						<img src="/static/img/docker.png" alt="Nifty Logo" class="brand-icon">
 						<div class="brand-title">
 							<span class="brand-text"> &nbsp;&nbsp;Docker</span>
 						</div>
@@ -59,52 +59,24 @@
 						</li>
 						<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 						<!--End Navigation toogle button-->
-
 					</ul>
 					<ul class="nav navbar-top-links pull-right">
-
-						<!--User dropdown-->
-						<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-						<li id="dropdown-user" class="dropdown">
-							<a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
-								<span class="pull-right">
-									<img class="img-circle img-user media-object" src="/static/img/av1.png" alt="Profile Picture">
-								</span>
-                                <!-- 登陆用户信息-->
-								<div class="username hidden-xs">{{ request.user.username }}</div>
-							</a>
-
-
-							<div class="dropdown-menu dropdown-menu-md dropdown-menu-right with-arrow panel-default">
-
-								<!-- User dropdown menu -->
-								<ul class="head-list">
-									<li>
-									</li>
-
-								</ul>
-
-								<!-- Dropdown footer -->
-								<div class="pad-all text-right">
-
-								</div>
-							</div>
-						</li>
-						<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <!-- 登陆用户信息-->
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 						<!--End user dropdown-->
-
+                        {% if username  %}
+                        <a  style="font-size: 18px;display: inline-block; margin: 20px 0px 0px 20px"  href=#>欢迎您:{{username}}</a>
+                        <a  style="font-size: 18px;display: inline-block; margin: 20px 100px 0px 10px" href="/logout">注销</a>
+                        {% endif %}
 					</ul>
 				</div>
 				<!--================================-->
 				<!--End Navbar Dropdown-->
-
 			</div>
 		</header>
 		<!--===================================================-->
 		<!--END NAVBAR-->
-
 		<div class="boxed">
-
 			<!--CONTENT CONTAINER-->
 			<!--===================================================-->
 			<div id="content-container">
@@ -132,8 +104,7 @@
 
                     <div class="row">
                     <!-- 这里的类名本来是col-lg-8，运用的栅栏格，将区域分成12个均等的部分，之前用的col-lg-8就大概代表占整个父级区域的百分之六十几，如果要占满整个父级的话，就应该要用col-lg-12 -->
-                        <div class="col-lg-12">
-
+                        <div class="col-lg-8">
                             <div class="panel">
                                 <div class="panel-heading">
 									<div class="panel-control">
@@ -145,7 +116,7 @@
                                     </div>
 								</div>
                             <!--<div id="chart-container" style="height: 300px; min-width: 600px;"> -->
-                                <div id="chart-container" style="height: 500px; width: 310px;">
+                                <div id="chart-container" style="height: 700px; width: 310px;">
                             </div>
                             </div>
                         </div>
@@ -276,34 +247,4 @@
     <script src="/static/plugins/highstock/js/modules/exporting.js"></script>
             </div></div></div>
   </body>
-<script>
-    $.ajax({
-        type:"get",
-        url:"http://127.0.0.1:8000/images",
-        dataType: 'json',
-        /*async:false,
-        jsonp: "callback",
-        jsonpCallback:"success",*/
-        /*contentType: "application/json",*/
-        success: function(data){
-            if(data.length>0){
-            //console.log(arr[0].metadata.name)
-                for(var i=0;i<data.length;i++){
-                	var p="";
-                	    p+='<div class="ownData">';
-                	    p+='<span><b>用户ID:</b>'+data[i].Id+'</span>';
-                	    p+='<span><b>用户RepoTags:</b>'+data[i].RepoTags+'</span>';
-                	    p+='</div>'
-
-                    $(".show").append(p);
-                }
-            }else{
-                alert("没有数据")
-            }
-        },
-        error:function(data){
-            alert(222);
-        }
-    });
-</script>
 </html>

@@ -16,8 +16,27 @@ from django.core.paginator import Paginator
 @login_required
 def index(request):
     username = request.session.get('username')
+    sumh = DockerHost.objects.count()     #host总数
+    sumc = Container.objects.count()      #容器总数
+    sumu = User.objects.count()           #用户总数
+    hostobj = DockerHost.objects.all()   #docker主机信息
+    for i,host in enumerate(hostobj):
+        print (i,host)
+    sum11 = Container.objects.filter(cmem=1024).filter(ccpu=1).count()
+    sum12 = Container.objects.filter(cmem=2048).filter(ccpu=1).count()
+    sum22 = Container.objects.filter(cmem=2048).filter(ccpu=2).count()
+    sum24 = Container.objects.filter(cmem=4096).filter(ccpu=2).count()
+    sum28 = Container.objects.filter(cmem=8192).filter(ccpu=2).count()
+    sum42 = Container.objects.filter(cmem=2048).filter(ccpu=4).count()
+    sum44 = Container.objects.filter(cmem=4096).filter(ccpu=4).count()
+    sum48 = Container.objects.filter(cmem=8192).filter(ccpu=4).count()
+    print(sum11,sum12,sum22,sum24,sum28,sum42,sum44,sum48)
+
     #print (username)
-    return render_to_response('index.html',{'username':username})
+    return render_to_response('index2.html',{'username':username,'sumh':sumh,'sumc':sumc,'sumu':sumu,'hostobj':hostobj,'sum11':sum11,'sum12':sum12,'sum22':sum22,'sum24':sum24,'sum28':sum28,'sum42':sum42,'sum44':sum44,'sum48':sum48})
+@login_required
+def help(request):
+    return  render_to_response('help.html')
 def base(request):
     username = request.POST.get('username')
     return render_to_response('base.html',{'username':username})
@@ -31,7 +50,7 @@ def login(request):
         if user is not None:
             try:
                 auth.login(request,user)
-                #request.session.set_expiry(60*30)
+                request.session.set_expiry(60*30)
                 request.session['username'] = username
                 #print 'session expires at :',request.session.get_expiry_date()
                 return HttpResponseRedirect('/')
@@ -82,6 +101,8 @@ def containers(request):
         bz = request.POST.get('bz')               #提交的备注
         pzcpu = pz.split(',')[0]
         pzmem = pz.split(',')[1]
+        imem = pzmem[:4]
+        print (pzmem,pzcpu,imem)
         while True:
             formatobj = Format.objects.filter(ip__ip=dockerip).filter(cpunuclear=pzcpu).filter(ifexit=0) #查找对应主机上对应模板是否存在
             if formatobj:       #查询模板是否存在，存在
@@ -134,11 +155,12 @@ def containers(request):
                                             print(cpuused)
                                             print('@')
                                             containerid,password = rundockercmd.createContainer(rundockercmd.sshClient(dockerip,dockerpassword),dockername=containername,imagename=imagename,containerip=ip,ip1=ip1,ip2=ip2,ip3=ip3,cpuused=cpuused,mem=pzmem)
+                                            print(containerid+'222222')
                                         if containerid:
                                             print(cpuused)
                                             print('$$$$$')
                                             #print(dockerip,containername, imagename,containerid,ip,password )
-                                            createresult = Container.objects.create(username=username,containerid=containerid,containername=containername,dockerhost=dockerip, containerhost=ip, imagename=imagename, password=password,cpunumber_id=formatid, bz=bz)
+                                            createresult = Container.objects.create(username=username,containerid=containerid,containername=containername,dockerhost=dockerip, containerhost=ip, imagename=imagename, password=password,cmem=imem,ccpu=pzcpu,cpunumber_id=formatid, bz=bz)
                                             print(createresult)
                                             if createresult:
                                                 ContainerIp.objects.filter(ip=ip).update(used=1)
@@ -198,10 +220,13 @@ def containers(request):
 @login_required
 def containerlist(request):
     username = request.session.get('username')
-    #print(username)
+    p1 = request.GET.get('p1')
     containerobj = Container.objects.filter(username=username) #查找用户名为登录用户的所有镜像,第一个username指数据库中的字段，第二个username指登录用户
-    #containerobj = Container.objects.all()
-    return render_to_response('containerslist.html',{'containerobj':containerobj,'username':username})
+    if p1:
+        p1 = p1
+    else:
+        p1 = ''
+    return render_to_response('containerslist.html',{'containerobj':containerobj,'username':username,'p1':p1})
 @login_required
 def containerrestart(request):
     msg = ''
@@ -220,7 +245,7 @@ def containerrestart(request):
     #print(dockerpassword)
     containerip = container.containerhost
     password = container.password
-    print(containerip)
+    #print(containerip)
     #print(dockerip,containerip,password)
     restartresult = rundockercmd.restartContainer(rundockercmd.sshClient(dockerip,dockerpassword),dockerid=containerid,containerip=containerip,password=password)
     if restartresult:
@@ -228,12 +253,13 @@ def containerrestart(request):
     else:
         msg = '容器重启失败'
     #print(restartresult)
-    return render_to_response('containerslist.html',{'msg':msg})
-    #return HttpResponseRedirect('/containers/list/')
+    #print(msg)
+    #return render_to_response('containerslist.html',{'msg':msg})
+    return HttpResponseRedirect('/containers/list/?p1=%s' % (msg))
 @login_required
 def containerstop(request):
+    msg = ''
     path = request.get_full_path()
-    #print(path)
     containerid = path.split('/')[3][:12]
     #print(containerid)
     try:
@@ -246,10 +272,14 @@ def containerstop(request):
     dockerpassword = docker.hostpassword
     #print(dockerpassword)
     stopresult = rundockercmd.stopContainer(rundockercmd.sshClient(dockerip,dockerpassword),containerid)
-    #print(stopresult)
-    return HttpResponseRedirect('/containers/list/')
+    if stopresult:
+        msg = '关闭容器成功'
+    else:
+        msg = '关闭容器失败'
+    return HttpResponseRedirect('/containers/list/?p1=%s' % (msg))
 @login_required
 def resetpassword(request):
+    msg = ''
     path = request.get_full_path()
     #print(path)
     containerid = path.split('/')[3][:12]
@@ -259,23 +289,24 @@ def resetpassword(request):
     except :
         msg = '数据库查询有问题'
     dockername = container.containername
-    print(dockername)
+    #print(dockername)
     dockerip = container.dockerhost
-    print(dockerip)
+    #print(dockerip)
     docker = DockerHost.objects.get(ip=dockerip)
     dockerpassword = docker.hostpassword
-    print(dockerpassword)
+    #print(dockerpassword)
     chagepassword = rundockercmd.resetpassword(rundockercmd.sshClient(dockerip,dockerpassword),dockername)
     print(chagepassword)
     if chagepassword:
         Container.objects.filter(containerid__startswith=containerid).update(password=chagepassword)
+        msg = '重置密码成功'
     else:
         msg = '重置密码错误'
-    return HttpResponseRedirect('/containers/list/')
-
+    return HttpResponseRedirect('/containers/list/?p1=%s' % (msg))
 
 @login_required
 def containerdelete(request):
+    msg = ''
     path = request.get_full_path()
     #print(path)
     containerid = path.split('/')[3][:12]
@@ -293,7 +324,6 @@ def containerdelete(request):
     print(formatobj)
     for fcpu in formatobj:
         sumc = fcpu.cnumber   #查询现在运行了多少台容器
-        print('*')
         print(sumc)
     docker = DockerHost.objects.get(ip=dockerip)
     dockerpassword = docker.hostpassword
@@ -301,7 +331,7 @@ def containerdelete(request):
     deleteresult = rundockercmd.deleteContainer(rundockercmd.sshClient(dockerip,dockerpassword),containerid)
     print(deleteresult)
     if deleteresult:
-        return render_to_response('containerslist.html',{'deleteresult':deleteresult })
+        msg = '删除失败,失败原因:' + deleteresult
     else:
         try:
             container = Container.objects.get(containerid__startswith=containerid).delete()  #删除数据库
@@ -310,14 +340,16 @@ def containerdelete(request):
                 print('使用达到6个cpu')
                 Format.objects.filter(ip__ip=dockerip).filter(usedcpu=cpun).update(cnumber=sumc-1)
                 Format.objects.filter(ip__ip=dockerip).filter(usedcpu=cpun).filter(ifexit=1).update(ifexit=0)
+                msg = '删除容器成功'
             else:
                 print('使用没有达到6个cpu')
                 Format.objects.filter(ip__ip=dockerip).filter(usedcpu=cpun).update(cnumber=sumc-1)
+                msg = '删除容器成功'
             #container = Container.objects.filter(containerid=containerid).delete()
         except :
-            msg = '删除数据失败'
+            msg = '数据库查询有问题'
             #print(msg)
-    return HttpResponseRedirect('/containers/list/')
+    return HttpResponseRedirect('/containers/list/?p1=%s' % (msg))
 @login_required
 def containercommit(request):
     username = request.session.get('username')
@@ -348,7 +380,6 @@ def containercommit(request):
             docker = DockerHost.objects.get(ip=dockerip) #根据ip地址查询
             dockerpassword = docker.hostpassword #获取密码
             #print(dockerpassword)
-
             commitresult = rundockercmd.commitContainer(rundockercmd.sshClient(dockerip,dockerpassword),containerid,commitimagename)
             msg = 'commit 失败' + commitresult
             if commitresult:
@@ -358,15 +389,18 @@ def containercommit(request):
                     print(commitresult)
                     tagresult = rundockercmd.pushImage(rundockercmd.sshClient(dockerip,dockerpassword),commitresult,commitimagename)
                     print(tagresult)
-                    msg = '提交远程完成！'
+                    msg = '提交远程镜像完成！'
                     createimage = ImageName.objects.create(username=username,imagename=commitimagename,departmentname=commitdeparment,bz=commitbz)
                 else:
                     msg ='私有仓库有问题，请联管理员'
                 return render_to_response('containercommit.html',{'msg':msg})
+                #return HttpResponseRedirect('/containers/list/?p1=%s' % (msg))
             else:
+                print(commitresult)
                 return render_to_response('containercommit.html',{'commitresult':commitresult,'msg':msg})
             return render_to_response('containercommit.html',{'msg':msg})
         return render_to_response('containercommit.html',{'msg':msg})
+        #return HttpResponseRedirect('/containers/list/?p1=%s' % (msg))
     return render_to_response('containercommit.html',{'msg':msg,'departmentobj':departmentobj,'username':username})
 #def registryimagesjson(request):
 #    url = "https://admin:admin@hc.docker.io/v2/_catalog"  #定义url地址
@@ -423,3 +457,13 @@ def registryimage(request):
         print(imageadmin)
         print(imageobj)
     return render_to_response('registryimage.html',{'username':username,'imageobj':imageobj,'imageadmin':imageadmin})
+
+def testjs(request):
+    username = request.session.get('username')
+    #print (username)
+    sumc = Container.objects.count()
+    print(sumc)
+    dobj = DockerHost.objects.all()
+    sumdocker = DockerHost.objects.count()
+    print(sumdocker)
+    return render_to_response('index2.html',{'sumc':sumc,'sumdocker':sumdocker,'dobj':dobj})

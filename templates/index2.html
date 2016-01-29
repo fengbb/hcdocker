@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% block title %}docker后台管理{% endblock %}
+{% block dl %}
+      {% if username  %}
+          <a  style="font-size: 16px;display: inline-block; margin: 20px 0px 0px 20px"  href=#>欢迎您:{{username}}</a>
+          <a  style="font-size: 16px;display: inline-block; margin: 20px 50px 0px 10px" href="/logout">注销</a>
+      {% endif %}
+{% endblock %}
+{% block images %}
+    <div class="col-sm-6 col-lg-4">
+        <div class="panel media pad-all">
+            <div class="media-left">
+                <span class="icon-wrap icon-wrap-sm icon-circle bg-success">
+                    <i class="fa fa-server fa-2x"></i>
+                </span>
+            </div>
+
+            <div class="media-body">
+                <p id="total_servers" class="text-2x mar-no text-thin"></p>
+                <p class="text-muted mar-no">Docker主机数</p>
+                <p class="text-muted mar-no">{{ sumh }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-4">
+        <div class="panel media pad-all">
+            <div class="media-left">
+                <span class="icon-wrap icon-wrap-sm icon-circle bg-danger">
+                    <i class="fa fa-desktop fa-2x"></i>
+                </span>
+            </div>
+            <div class="media-body">
+                <p id="current_connected_hosts" style="cursor: pointer" onclick="ShowOnlineHosts()"  class="text-2x mar-no btn-link text-thin"></p>
+                <p class="text-muted mar-no">容器数</p>
+                <p class="text-muted mar-no">{{ sumc }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-4">
+        <div class="panel media pad-all">
+            <div class="media-left">
+                <span class="icon-wrap icon-wrap-sm icon-circle bg-warning">
+                    <i class="fa fa-comment fa-2x"></i>
+                </span>
+            </div>
+            <div  class="media-body">
+                <p id="current_logging_users" style="cursor: pointer" onclick="ShowOnlineUsers()" class="text-2x btn-link  mar-no text-thin"></p>
+                <p class="text-muted mar-no">用户数</p>
+                <p class="text-muted mar-no">{{ sumu }}</p>
+            </div>
+        </div>
+    </div>
+    <!-- 为 ECharts 准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 1200px;height:400px;">
+    容器信息
+    </div>
+    <!--
+    <div id="info" style="width: 600px;height: 400px;">
+    <h2 style="display: inline-block;margin: 0 20px 0 0 ">欢迎使用docker管理平台,请认真阅读以下使用规范。</h2><br>
+    <h4 style="display: inline-block;margin: 20px 20px 0 0">(1) docker管理平台提供容器的创建,删除,关闭,重启,提交和远程镜像查看功能</h4><br>
+    <h4 style="display: inline-block;margin: 20px 20px 0 0">(2) 每个用户可以创建5台容器</h4><br>
+    <h4 style="display: inline-block;margin: 20px 20px 0 0">(3) 容器创建完成后可以直接用容器列表中对应的ip和密码SSH登录</h4><br>
+    <h4 style="display: inline-block;margin: 20px 20px 0 0 ">(4) 删除容器的时候先关闭容器，并等待30秒左右然后进行删除</h4><br>
+    <h4 style="display: inline-block;margin: 20px 20px 0 0 ">(5) 提交镜像的时候，镜像名一定要按照规范命名centos(使用的iso类型)_app(项目名)_vx(版本)</h4><br>
+    <h4 style="display: inline-block;margin: 20px 20px 0 0 ">(6) 远程镜像已经提供了基础镜像centos_base,请在基础镜像上更改并提交</h4><br>
+    <h4 style="display: inline-block;margin: 20px 20px 0 0 ">(7) 容器更改完成后要记得提交</h4><br>
+    </div>
+    -->
+
+
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        // 指定图表的配置项和数据
+        var option = {
+            title : {
+                text: '各个配置容器数量',
+                //subtext: '纯属虚构',
+                x:'left'
+            },
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                    }
+            },
+            legend: {
+                data:['1核1G内存','1核2G内存','2核2G内存','2核4G内存','2核8G内存','4核2G内存','4核4G内存','4核8G内存']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ['']
+                    //['周一','周二','周三','周四','周五','周六','周日']
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    name:'1核1G内存',
+                    type:'bar',
+                    data:[{{ sum11 }}]
+                },
+                {
+                    name:'1核2G内存',
+                    type:'bar',
+                    data:[{{ sum12 }}]
+                },
+                {
+                    name:'2核2G内存',
+                    type:'bar',
+                    //stack: '广告',
+                    data:[{{ sum22 }}]
+                },
+                {
+                    name:'2核4G内存',
+                    type:'bar',
+                    //stack: '广告',
+                    data:[{{ sum24 }}]
+                },
+                {
+                    name:'2核8G内存',
+                    type:'bar',
+                    data:[{{ sum28 }}],
+                },
+                {
+                    name:'4核2G内存',
+                    type:'bar',
+                    //barWidth : 5,
+                    //stack: '搜索引擎',
+                    data:[{{ sum42 }}]
+                },
+                {
+                    name:'4核4G内存',
+                    type:'bar',
+                    //stack: '搜索引擎',
+                    data:[{{ sum44 }}]
+                },
+                {
+                    name:'4核8G内存',
+                    type:'bar',
+                    //stack: '搜索引擎',
+                    data:[{{ sum48 }}]
+                }
+            ]
+        };
+    myChart.setOption(option);
+    </script>
+{% endblock %}

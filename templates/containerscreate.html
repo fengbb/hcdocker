@@ -59,7 +59,7 @@
                                         <button class="btn btn-default" type="button" style="font-size: 14px;">镜像名称</button>
                                     </span>
                                 <select name="imagename" id="" style="font-size: 14px;" class="form-control">
-                                    <option name="imagename" value="centos_base" selected style="font-size: 14px;">centos</option>
+                                    <option name="imagename" value="centos_base" selected style="font-size: 14px;">centos_base</option>
                                     {% for imageadmin in imageadmin %}
                                         <option name="imagename" value="{{ imageadmin.imagename }}" style="font-size: 14px;">{{ imageadmin.imagename }}</option>
                                     {% endfor %}

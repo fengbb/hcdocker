@@ -24,7 +24,8 @@
 	<!--SCRIPT-->
         <link href="/static/css/pace.min.css" rel="stylesheet">
 	    <script src="/static/js/pace.min.js"></script>
-        <script src="/static/js/jquery-2.1.1.min.js"></script>
+        <script src="/static/js/jquery-2.1.1.min.js"></script>、
+        <script src="/static/js/echarts.min.js"></script>
 	<!--=================================================-->
 	<!--Page Load Progress Bar [ OPTIONAL ]-->
     {% endblock %}
@@ -67,7 +68,6 @@
                     <!--登录信息-->
                          {% block dl %}
                          {% endblock %}
-						</li>
 					</ul>
 				</div>
 				<!--================================-->
@@ -182,7 +182,7 @@
                                         <!--Submenu-->
 										<ul class="collapse">
 											<li><a href="/containers">创建容器</a></li>
-											<li><a href="/containers/list">查看容器</a></li>
+											<li><a href="/containers/list/">查看容器</a></li>
 											<!--li class="list-divider"></li>
 											<li><a href="#">Separate link</a></li-->
 
@@ -204,6 +204,15 @@
 											<li><a href="#">Separate link</a></li-->
 
 										</ul>
+									</li>
+                                <li>
+                                    <a href="/help" >
+                                        <i class="fa fa-server"></i>
+                                        <span class="menu-title">
+                                            <strong>帮助</strong>
+                                        </span>
+                                    </a>
+                                    <!--Submenu-->
 									</li>
 
 									<!--Category name-->

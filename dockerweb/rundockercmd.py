@@ -77,7 +77,6 @@ def resetpassword(sshobject,dockername):
     cmdchagepw = 'docker exec -d %s /root/cpasswd.sh %s' %(dockername,basepassword)
     stdincp,stdoutcp,stderrcp = sshobject.exec_command(cmdchagepw)
     return basepassword
-
 def restartContainer(sshobject,dockerid,containerip,password):
     cmdrestartcontainer = 'docker restart %s' % (dockerid)
     stdinrestart,stdoutrestart,stderrrestart = sshobject.exec_command(cmdrestartcontainer)
@@ -101,7 +100,8 @@ def stopContainer(sshobject,dockerid):
     cmdstop = 'docker stop %s' % (dockerid)
     stdinstop,stdoutstop,stderrstop = sshobject.exec_command(cmdstop)
     time.sleep(5)
-    #print(stdoutstop.read().decode())
+    stopresult = stdoutstop.read().decode()
+    return stopresult
 def deleteContainer(sshobject,dockerid):
     cmdstop = 'docker rm %s' % (dockerid)
     stdinstop,stdoutstop,stderrstop = sshobject.exec_command(cmdstop)
@@ -130,7 +130,7 @@ def pushImage(sshobject,imageid,imagename):
     stdinpush,stdoutpush,stderrpush = sshobject.exec_command(cmdpush)
     #print(stdoutpush.read().decode())
     pushresult = stdoutpush.read().decode()
-    print(pushresult)
+    #print(pushresult)
     return pushresult
 def getIp():
     notUsedIp = ContainerIp.objects.filter(used=0)

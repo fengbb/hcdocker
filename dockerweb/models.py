@@ -31,6 +31,8 @@ class Container(models.Model):
     imagename = models.CharField(u'镜像名',max_length=50)
     password = models.CharField(u'密码',max_length=10)
     #cpunumber = models.IntegerField(u'所在cpu号',null=True)
+    cmem = models.IntegerField(u'容器内存大小',null=True)
+    ccpu = models.IntegerField(u'容器使用核数',null=True)
     cpunumber = models.ForeignKey(Format)
     bz = models.CharField(u'备注',max_length=100,null=True)
     #status = models.CharField(u'状态',max_length=50,null=True,blank=True)
